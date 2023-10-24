@@ -2,26 +2,26 @@
 
 return [
     'groups' => [
-        'system' => 'System',
+        'system' => 'Hệ thống',
         'blog' => 'Blog',
     ],
     'user' => [
-        'users' => 'Users',
+        'users' => 'Người dùng',
         'columns' => [
             'id' => 'ID',
             'email' => 'Email',
-            'name' => 'Name',
-            'password' => 'Password',
+            'name' => 'Tên',
+            'password' => 'Mật khẩu',
         ],
     ],
 
     'post_category' => [
-        'post_categories' => 'Categories',
+        'post_categories' => 'Danh mục',
         'columns' => [
             'id' => 'ID',
             'slug' => 'Slug',
-            'name' => 'Name',
-            'order' => 'Order',
+            'name' => 'Tên',
+            'order' => 'Thứ tự',
         ],
     ]
 ];

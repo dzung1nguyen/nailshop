@@ -25,12 +25,12 @@ class UserResource extends Resource
 
     public static function getModelLabel(): string
     {
-        return __('admin.users.users');
+        return __('admin.user.users');
     }
 
     public static function getNavigationLabel(): string
     {
-        return __('admin.users.users');
+        return __('admin.user.users');
     }
 
     public static function getNavigationGroup(): ?string
@@ -43,19 +43,19 @@ class UserResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->label(__('admin.users.columns.name'))
+                    ->label(__('admin.user.columns.name'))
                     ->required()
                     ->maxLength(100),
 
                 Forms\Components\TextInput::make('email')
-                    ->label(__('admin.users.columns.email'))
+                    ->label(__('admin.user.columns.email'))
                     ->email()
                     ->required()
                     ->maxLength(191)
                     ->unique(ignorable: fn ($record) => $record),
 
                 Forms\Components\TextInput::make('password')
-                    ->label(__('admin.users.columns.password'))
+                    ->label(__('admin.user.columns.password'))
                     ->password()
                     ->minLength(6)
                     ->maxLength(100)
@@ -69,9 +69,9 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->label(__('admin.users.columns.id'))->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('name')->label(__('admin.users.columns.name'))->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('email')->label(__('admin.users.columns.email'))->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('id')->label(__('admin.user.columns.id'))->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('name')->label(__('admin.user.columns.name'))->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('email')->label(__('admin.user.columns.email'))->searchable()->sortable(),
             ])
             ->filters([
                 //
