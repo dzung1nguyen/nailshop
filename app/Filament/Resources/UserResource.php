@@ -12,18 +12,56 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Hash;
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    // https://heroicons.com/
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+
+    protected static ?string $recordTitleAttribute = 'email';
+
+    public static function getModelLabel(): string
+    {
+        return __('admin.users.users');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('admin.users.users');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('admin.groups.system');
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')
+                    ->label(__('admin.users.columns.name'))
+                    ->required()
+                    ->maxLength(100),
+
+                Forms\Components\TextInput::make('email')
+                    ->label(__('admin.users.columns.email'))
+                    ->email()
+                    ->required()
+                    ->maxLength(191)
+                    ->unique(ignorable: fn ($record) => $record),
+
+                Forms\Components\TextInput::make('password')
+                    ->label(__('admin.users.columns.password'))
+                    ->password()
+                    ->minLength(6)
+                    ->maxLength(100)
+                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                    ->dehydrated(fn ($state) => filled($state))
+                    ->required(fn (string $context): bool => $context === 'create')
             ]);
     }
 
@@ -31,13 +69,16 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('id')->label(__('admin.users.columns.id'))->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('name')->label(__('admin.users.columns.name'))->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('email')->label(__('admin.users.columns.email'))->searchable()->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -45,14 +86,14 @@ class UserResource extends Resource
                 ]),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -60,5 +101,5 @@ class UserResource extends Resource
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
-    }    
+    }
 }
