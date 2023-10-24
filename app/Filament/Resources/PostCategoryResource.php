@@ -23,32 +23,34 @@ class PostCategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-     public static function getModelLabel(): string
-     {
-         return __('admin.post_category.post_categories');
-     }
+    protected static ?int $navigationSort = 9;
 
-     public static function getNavigationLabel(): string
-     {
-         return __('admin.post_category.post_categories');
-     }
+    public static function getModelLabel(): string
+    {
+        return __('admin.post_category.post_categories');
+    }
 
-     public static function getNavigationGroup(): ?string
-     {
-         return __('admin.groups.blog');
-     }
+    public static function getNavigationLabel(): string
+    {
+        return __('admin.post_category.post_categories');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('admin.groups.blog');
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                        ->label(__('admin.post_category.columns.name'))
-                        ->required(),
+                    ->label(__('admin.post_category.columns.name'))
+                    ->required(),
 
                 Forms\Components\TextInput::make('slug')
-                        ->label(__('admin.post_category.columns.slug'))
-                        ->required(),
+                    ->label(__('admin.post_category.columns.slug'))
+                    ->required(),
 
                 Forms\Components\TextInput::make('order')
                     ->label(__('admin.post_category.columns.order'))
@@ -56,7 +58,7 @@ class PostCategoryResource extends Resource
                     ->minValue(0)
                     ->required(),
 
-                SpatieMediaLibraryFileUpload::make('avatar')->image()
+                SpatieMediaLibraryFileUpload::make('image')->image()
 
             ]);
     }
@@ -67,13 +69,14 @@ class PostCategoryResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')->label(__('admin.post_category.columns.id'))->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('name')->label(__('admin.post_category.columns.name')),
-                Tables\Columns\TextColumn::make('order')->label(__('admin.post_category.columns.order')),
+                Tables\Columns\TextColumn::make('order')->numeric()->label(__('admin.post_category.columns.order')),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

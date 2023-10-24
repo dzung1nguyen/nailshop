@@ -23,6 +23,8 @@ class UserResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'email';
 
+    protected static ?int $navigationSort = 10;
+
     public static function getModelLabel(): string
     {
         return __('admin.user.users');
@@ -35,7 +37,7 @@ class UserResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('admin.groups.system');
+        return __('admin.groups.settings');
     }
 
     public static function form(Form $form): Form

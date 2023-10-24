@@ -2,9 +2,10 @@
 
 return [
     'groups' => [
-        'system' => 'Hệ thống',
+        'settings' => 'Cài đặt',
         'blog' => 'Blog',
     ],
+
     'user' => [
         'users' => 'Người dùng',
         'columns' => [
@@ -22,6 +23,26 @@ return [
             'slug' => 'Slug',
             'name' => 'Tên',
             'order' => 'Thứ tự',
+        ],
+    ],
+
+    'post' => [
+        'posts' => 'Bài viết',
+        'setup' => 'Cài đặt',
+        'columns' => [
+            'id' => 'ID',
+            'title' => 'Tiêu đề',
+            'desciption' => 'Mô tả',
+            'content' => 'Nội dung',
+            'image' => 'Hình ảnh',
+            'status' => 'Trạng thái',
+            'featured' => 'Nổi bật?',
+            'published_date' => 'Ngày xuất bản',
+            'categories' => 'Danh mục',
+        ],
+        'enums' => [
+            'draft' => 'Nháp',
+            'published' => 'Xuất bản',
         ],
     ]
 ];

@@ -9,16 +9,16 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class PostCategory extends Model implements HasMedia
+class Post extends Model implements HasMedia
 {
     use HasTranslations;
     use InteractsWithMedia;
 
     protected $fillable = [
-        'slug', 'name', 'order',
+        'title', 'desciption', 'content', 'status', 'published_date', 'featured'
     ];
 
-    public $translatable = ['slug', 'name'];
+    public $translatable = ['title', 'desciption', 'content'];
 
     public function registerMediaConversions(Media $media = null): void
     {
@@ -30,6 +30,6 @@ class PostCategory extends Model implements HasMedia
 
     public function categories()
     {
-        return $this->belongsToMany(PostCategory::class, 'post_category', 'category_id', 'post_id');
+        return $this->belongsToMany(PostCategory::class, 'post_category', 'post_id', 'category_id');
     }
 }
