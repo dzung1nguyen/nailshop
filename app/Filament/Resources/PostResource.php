@@ -61,7 +61,7 @@ class PostResource extends Resource
                                 ->label(__('admin.post.columns.desciption'))
                                 ->required(),
 
-                            Forms\Components\RichEditor::make('content')
+                            Forms\Components\MarkdownEditor::make('content')
                                 ->label(__('admin.post.columns.content'))
                                 ->required(),
                         ]),

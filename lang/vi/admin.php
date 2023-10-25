@@ -7,7 +7,7 @@ return [
     ],
 
     'user' => [
-        'users' => 'Người dùng',
+        'users' => 'Tài khoản',
         'columns' => [
             'id' => 'ID',
             'email' => 'Email',

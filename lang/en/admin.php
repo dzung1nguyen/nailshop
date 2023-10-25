@@ -44,5 +44,24 @@ return [
             'draft' => 'Draft',
             'published' => 'Published',
         ],
+    ],
+
+    'contact' => [
+        'contacts' => 'Contacts',
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            'phone' => 'Phone',
+            'email' => 'Email',
+            'message' => 'Message',
+            'note' => 'Note',
+            'status' => 'Status',
+            'created_at' => 'Created at',
+        ],
+        'enums' => [
+            'new' => 'New',
+            'pending' => 'Pending',
+            'processed' => 'Processed',
+        ],
     ]
 ];
